@@ -1,7 +1,57 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
+import Chart from 'chart.js';
 
 
 function HomePage() {
+    useEffect(() => {
+        var dataSource = {
+            datasets: [
+                {
+                    data: [],
+                    backgroundColor: [
+                        '#ffcd56',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#fd6b19',
+                        '#6EFF33',
+                        '#3342FF',
+                        '#000000',
+                        '#DD25BE',
+                        '#F3FF00',
+    
+                        
+                    ],
+                }
+            ],
+            labels: []
+        };
+
+        function createChart() {
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: dataSource
+            });
+        }
+    
+        function getBudget(){
+            axios.get('http://localhost:4000/budget')
+            .then(function (res) {
+                console.log(res.data);
+                for (var i=0; i < res.data.myBudget.length; i++) {
+                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                    dataSource.labels[i] = res.data.myBudget[i].title;
+                }
+                createChart();
+            });
+        }
+        getBudget();
+    })
+
+
+
+
   return (
     <main className="center" id="main">
 
