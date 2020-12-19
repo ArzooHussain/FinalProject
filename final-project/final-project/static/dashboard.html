@@ -95,12 +95,17 @@
     
             <div class="text-box">
                 <h1>Chart</h1>
+                <form action= "/static/budgetItem" method="POST"></form>
                 <p>
                     <canvas id="myChart" width="400" height="400"></canvas>
-                    <form action= "/static/budgetItem" method="POST"></form>
                 </p>
 
-                
+                <p>                    
+                    <canvas id="myChart1" width="400" height="400"></canvas>
+                </p>
+                <p>
+                    <canvas id="myChart2" width="400" height="400"></canvas>
+                </p>
 
 
             </div>
@@ -143,6 +148,22 @@
         var ctx = document.getElementById("myChart").getContext("2d");
         var myPieChart = new Chart(ctx, {
             type: 'pie',
+            data: dataSource
+        });
+    }
+
+    function createChart1() {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myPieChart = new Chart(ctx, {
+            type: 'bar',
+            data: dataSource
+        });
+    }
+
+    function createChart2() {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myPieChart = new Chart(ctx, {
+            type: 'line',
             data: dataSource
         });
     }

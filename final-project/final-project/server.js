@@ -5,8 +5,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const User = require('./model/user')
 const budgetModel = require('./model/budget_schema')
-const url = 'mongodb://localhost:27017/final_project'
-//const app = express();
+const url = 'mongodb://localhost:27017/personal_budget_8';
+const app = express();
 
 
 
@@ -15,13 +15,13 @@ const jwt = require('jsonwebtoken')
 
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
-mongoose.connect('mongodb://localhost:27017/final_project', {
+mongoose.connect('mongodb://localhost:27017/personal_budget_8', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true
 })
 
-const app = express()
+
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
