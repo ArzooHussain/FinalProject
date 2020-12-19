@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget Login</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+     <!-- This is an SEO Change -->
+    <meta charset="en">
+    <title> Personal Budget</title>
+    <div class="menu">
+        <ul>
+            <!-- This is a Semantic HTML Change -->
+            <li><a href="dashboard.html">Homepage</a></li>
+        
+          
+        </ul>
+    </div>
+
+    <button aria-label="screen reader only"></button>
+
+    <div class="hero">
+        
+        <h1>Personal Budget</h1>
+        <h2> personal-budget management app</h2>
+    </div>
+        <!-- This is an SEO Change -->
+        <meta name="description" content="The purpose of this page is to help you, the user, create a personal budget. " />
+
+
+
+
+		<h1>Login</h1>
+		<form id="login">
+			<input type="text" autocomplete="off" id="username" placeholder="Username" />
+			<input type="password" autocomplete="off" id="password" placeholder="Password" />
+			<input type="submit" value="Submit Form"  />
+		</form>
+
+		<script>
+			const form = document.getElementById('login')
+			form.addEventListener('submit', login )
+
+			async function login(event) {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+
+				const result = await fetch('/api/login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						username,
+						password
+					})
+					
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everything went fine
+					console.log('Got the token: ', result.data)
+					localStorage.setItem('token', result.data)
+					alert('Success')
+				} else {
+					alert(result.error)
+				}
+			}
+			    
+
+			function pageRedirect() {
+       		 window.location.replace("/static/error.html");
+   			 }      
+				setTimeout("pageRedirect()", 100000);
+
+			function pageRoute() {
+       		 window.location.replace("/static/dashboard.html");
+   			 }      
+   			 
+		</script>
+	</body>
+</html>
+
+
+
